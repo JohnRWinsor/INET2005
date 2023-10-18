@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pizza Form</title>
+</head>
+<body>
+    <h1>Make your pizza</h1>
+
+    <form method="post" action="pizza.php">
+        <label for="size">Choose your size:</label>
+        <select name="size" id="size">
+            <option value="small">Small ($9.00)</option>
+            <option value="medium">Medium ($12.50)</option>
+            <option value="large">Large ($15.00)</option>
+            <option value="extra">Extra Large ($17.50)</option>
+        </select>
+
+        <h2>Toppings:</h2>
+        <p>(cheese is free)</p>
+        
+        <label for="pepperoni">Pepperoni ($1.00): </label>
+        <input type="checkbox" id="pepperoni" name="toppings[]" value="pepperoni"><br>
+
+        <label for="olive">Olives ($1.00): </label>
+        <input type="checkbox" id="olive" name="toppings[]" value="olive"><br>
+
+        <label for="pineapple">Pineapple ($1.00): </label>
+        <input type="checkbox" id="pineapple" name="toppings[]" value="pineapple"><br>
+
+        <label for="ham">Ham ($1.00): </label>
+        <input type="checkbox" id="ham" name="toppings[]" value="ham"><br>
+
+        <label for="cheese">Cheese ($0.00): </label>
+        <input type="checkbox" id="cheese" name="toppings[]" value="cheese"><br>
+
+        <input type="submit" value="Place Order">
+    </form>
+</body>
+</html>
