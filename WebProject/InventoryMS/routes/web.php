@@ -15,8 +15,8 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/categories/{id}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::patch('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
 Route::get('/categories/{id}/confirm-delete', [CategoryController::class, 'confirmDelete'])->name('categories.confirm-delete');
-
-
+Route::delete('/categories/{category}', 'CategoryController@destroy')->name('categories.destroy');
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
 // Items
@@ -26,4 +26,4 @@ Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 Route::get('/items/{id}/edit', [ItemController::class, 'edit'])->name('items.edit');
 Route::patch('/items/{id}', [ItemController::class, 'update'])->name('items.update');
 Route::get('/items/{id}/confirm-delete', [ItemController::class, 'confirmDelete'])->name('items.confirm-delete');
-Route::delete('/items/{id}', [ItemController::class, 'destroy'])->name('items.destroy');
+Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');

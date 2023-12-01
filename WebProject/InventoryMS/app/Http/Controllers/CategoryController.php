@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Item;
+
 
 class CategoryController extends Controller
 {
@@ -52,5 +54,13 @@ public function store(Request $request)
     ]);
 
     return redirect('/categories')->with('success', 'Category created successfully.');
+}
+
+public function destroy(Category $category)
+{
+    $category->delete();
+
+    return redirect()->route('categories.index')
+                     ->with('success', 'Category deleted successfully');
 }
 }

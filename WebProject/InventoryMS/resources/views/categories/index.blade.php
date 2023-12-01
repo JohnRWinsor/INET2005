@@ -1,14 +1,14 @@
-<!-- /resources/views/categories/index.blade.php -->
+<!-- resources/views/categories/index.blade.php -->
 @extends('layouts.app')
 @section('content')
     <h2>Categories</h2>
 
-    <a href="{{ url('/categories/create') }}">Add New Category</a>
+    <a href="{{ route('categories.create') }}">Add New Category</a>
 
     <table>
         <thead>
             <tr>
-                <th>Category Name</th>
+                <th>Name</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -17,8 +17,12 @@
                 <tr>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a href="{{ url("/categories/{$category->id}/edit") }}">Edit</a>
-                        <!-- Add delete button with JavaScript confirmation here -->
+                        <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
+                        <form method="POST" action="{{ route('categories.destroy', $category->id) }}" onsubmit="return confirm('Do you really want to delete?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

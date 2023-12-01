@@ -2,36 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class ItemController extends Controller
 {
     public function index()
     {
-        $items = Item::all();
-
-
+        $items = Item::with('category')->get();
         return view('items.index', compact('items'));
     }
 
     public function create()
     {
-        return view('items.create');
+        $categories = Category::all();
+        return view('items.create', compact('categories'));
     }
-
+    
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required',
-        'category_id' => 'required|exists:categories,id',
-        // validate other input
-    ]);
-
-    Item::create($request->all());
-
-    return redirect('/items')->with('success', 'Item created successfully.');
-}
+    {
+        $request->validate([
+            'title' => 'required',
+            'category_id' => 'required|exists:categories,id',
+            'SKU' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'quantity' => 'required',
+            'picture' => 'required',
+        ]);
+    
+        Item::create($request->all());
+    
+        return redirect('/items')->with('success', 'Item created successfully.');
+    }
 
     public function show(Item $item)
     {
@@ -55,13 +60,4 @@ class ItemController extends Controller
     
         return redirect('/items')->with('success', 'Item updated successfully.');
     }
-
-    public function destroy(Item $item)
-    {
-        $item->delete();
-
-        return redirect()->route('items.index')->with('success', 'Item deleted successfully');
-    }
-
-    
 }
