@@ -1,0 +1,50 @@
+version: '3'
+services:
+  # MariaDB Service
+  db:
+    container_name: db
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: super_secret123?
+      MYSQL_DATABASE: courses
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret_pwd123?
+    ports:
+      - "9906:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    networks:
+      - php-mariadb-network
+
+  # PHP Service
+  php:
+    # image: php:7.4-apache
+    # image: php-byme
+    container_name: php-apache
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./app/src:/var/www/html
+      - C:\Users\W0474402\Documents\GitHub\ITNET2005\Portfolio:/var/www/html/Portfolio
+    ports:
+      - "8112:80"
+    networks:
+      - php-mariadb-network
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8113:80'
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+    networks:
+      - php-mariadb-network
+
+networks:
+  php-mariadb-network:
