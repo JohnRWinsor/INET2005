@@ -26,5 +26,8 @@ Route::post('/items', [ItemController::class, 'store']);
 Route::get('/items/{id}/edit', [ItemController::class, 'edit']);
 Route::patch('/items/{id}', [ItemController::class, 'update']);
 Route::get('/items/{id}/delete', [ItemController::class, 'confirmDelete']);
-Route::delete('/items/{id}', [ItemController::class, 'destroy']);
-Route::resource('items', 'ItemController');
+Route::delete('/items/{id}', [ItemController::class, 'destroy'])->name('items.destroy');;
+Route::get('/items/{id}/edit', [ItemController::class, 'edit'])->name('items.edit');
+
+
+

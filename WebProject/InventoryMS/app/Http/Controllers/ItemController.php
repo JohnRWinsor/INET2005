@@ -1,6 +1,6 @@
 <?php
 
-// app/Http/Controllers/ItemController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -104,10 +104,14 @@ class ItemController extends Controller
     public function destroy($id)
     {
         $item = Item::findOrFail($id);
+    
         // Soft delete the item
         $item->delete();
+    
         // Delete the image from the server
-        Storage::disk('public')->delete($item->picture);
+        if($item->picture) {
+            Storage::disk('public')->delete($item->picture);
+        }
     
         return redirect('/items');
     }
