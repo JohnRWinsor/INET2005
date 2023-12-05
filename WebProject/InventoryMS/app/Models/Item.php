@@ -1,14 +1,15 @@
 <?php
 
-// app/Models/Item.php
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Item extends Model
 {
-    protected $fillable = ['category_id', 'title', 'description', 'price', 'quantity', 'SKU', 'picture'];
+
+    protected $fillable = ['category_id', 'title', 'description', 'price', 'quantity', 'sku', 'picture'];
 
     public function category()
     {

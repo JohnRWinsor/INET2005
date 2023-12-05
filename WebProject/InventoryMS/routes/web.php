@@ -20,10 +20,11 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])-
 
 
 // Items
-Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
-Route::post('/items', [ItemController::class, 'store'])->name('items.store');
-Route::get('/items', [ItemController::class, 'index'])->name('items.index');
-Route::get('/items/{id}/edit', [ItemController::class, 'edit'])->name('items.edit');
-Route::patch('/items/{id}', [ItemController::class, 'update'])->name('items.update');
-Route::get('/items/{id}/confirm-delete', [ItemController::class, 'confirmDelete'])->name('items.confirm-delete');
-Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
+Route::get('/items', [ItemController::class, 'index']);
+Route::get('/items/create', [ItemController::class, 'create']);
+Route::post('/items', [ItemController::class, 'store']);
+Route::get('/items/{id}/edit', [ItemController::class, 'edit']);
+Route::patch('/items/{id}', [ItemController::class, 'update']);
+Route::get('/items/{id}/delete', [ItemController::class, 'confirmDelete']);
+Route::delete('/items/{id}', [ItemController::class, 'destroy']);
+Route::resource('items', 'ItemController');

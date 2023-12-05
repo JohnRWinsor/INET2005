@@ -2,20 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
-use App\Models\Category;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
-    
-    public function destroy(Category $category)
-    {
-        $category->delete();
-
-        return redirect()->route('categories.index')
-                         ->with('success', 'Category deleted successfully');
-    }
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
